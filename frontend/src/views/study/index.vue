@@ -1,0 +1,55 @@
+<template>
+  <div class="app-container">
+    <InputSearch @search="goWebPage" />
+    <div class="wrap">
+      <WebCard :data="webItems" />
+    </div>
+    <Footer />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+import InputSearch from "@/views/components/InputSearch.vue";
+import { ipcApiRoute } from '@/api/main';
+import { ipc } from '@/utils/ipcRenderer';
+import {onActivated, ref} from 'vue';
+import WebCard from "@/views/components/WebCard.vue";
+import Footer from "@/components/global/Footer.vue";
+
+const router = useRouter();
+const goWebPage = (url) => {
+  if (!url) {
+    return;
+  }
+  router.push({
+    path: '/web',
+    query: {
+      url,
+      category: 'study'
+    }
+  })
+  // router.push("/web?url=" + url + "&category=study");
+}
+
+const webItems = ref([]);
+
+const handleQueryWebList = async () => {
+  webItems.value = await ipc.invoke(ipcApiRoute.selectWebList, {
+    category: "study"
+  })
+}
+
+onActivated(() => {
+  handleQueryWebList();
+})
+
+</script>
+<style scoped>
+.wrap {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+</style>

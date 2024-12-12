@@ -1,0 +1,206 @@
+{
+  "cache": {
+    "config": {
+      "env": "local",
+      "name": "ToReduce",
+      "baseDir": "D:\\project\\gitee\\thief\\electron",
+      "HOME": "D:\\project\\gitee\\thief",
+      "rundir": "D:\\project\\gitee\\thief\\electron\\run",
+      "dump": {
+        "ignore": {}
+      },
+      "homeDir": "D:\\project\\gitee\\thief",
+      "root": "D:\\project\\gitee\\thief",
+      "appUserDataDir": "C:\\Users\\haotian lu\\AppData\\Roaming\\ToReduce",
+      "userHome": "C:\\Users\\haotian lu",
+      "appVersion": "1.0.0",
+      "isPackaged": false,
+      "execDir": "D:\\project\\gitee\\thief",
+      "logger": {
+        "type": "application",
+        "dir": "D:\\project\\gitee\\thief\\logs",
+        "encoding": "utf8",
+        "env": "local",
+        "level": "INFO",
+        "consoleLevel": "INFO",
+        "disableConsoleAfterReady": false,
+        "outputJSON": false,
+        "buffer": true,
+        "appLogName": "ee.log",
+        "coreLogName": "ee-core.log",
+        "agentLogName": "ee-agent.log",
+        "errorLogName": "ee-error.log",
+        "coreLogger": {},
+        "allowDebugAtProd": false,
+        "enablePerformanceTimer": false,
+        "rotator": "day"
+      },
+      "customLogger": {},
+      "httpclient": {
+        "enableDNSCache": false,
+        "dnsCacheLookupInterval": 10000,
+        "dnsCacheMaxLength": 1000,
+        "request": {
+          "timeout": 5000
+        },
+        "httpAgent": {
+          "keepAlive": true,
+          "freeSocketTimeout": 4000,
+          "maxSockets": 9007199254740991,
+          "maxFreeSockets": 256
+        },
+        "httpsAgent": {
+          "keepAlive": true,
+          "freeSocketTimeout": 4000,
+          "maxSockets": 9007199254740991,
+          "maxFreeSockets": 256
+        }
+      },
+      "developmentMode": {
+        "default": "vue",
+        "mode": {
+          "vue": {
+            "protocol": "http://",
+            "hostname": "localhost",
+            "port": 8080
+          },
+          "react": {
+            "protocol": "http://",
+            "hostname": "localhost",
+            "port": 3000
+          },
+          "html": {
+            "protocol": "http://",
+            "hostname": "localhost",
+            "indexPage": "index.html"
+          }
+        }
+      },
+      "socketServer": {
+        "enable": false,
+        "port": 7070,
+        "path": "/socket.io/",
+        "connectTimeout": 45000,
+        "pingTimeout": 30000,
+        "pingInterval": 25000,
+        "maxHttpBufferSize": 100000000,
+        "transports": [
+          "polling",
+          "websocket"
+        ],
+        "cors": {
+          "origin": true
+        },
+        "channel": "c1"
+      },
+      "httpServer": {
+        "enable": false,
+        "https": {
+          "enable": false,
+          "key": "/public/ssl/localhost+1.key",
+          "cert": "/public/ssl/localhost+1.pem"
+        },
+        "protocol": "http://",
+        "host": "127.0.0.1",
+        "port": 7071,
+        "cors": {
+          "origin": "*"
+        },
+        "body": {
+          "multipart": true,
+          "formidable": {
+            "keepExtensions": true
+          }
+        },
+        "filterRequest": {
+          "uris": [
+            "favicon.ico"
+          ],
+          "returnData": ""
+        }
+      },
+      "mainServer": {
+        "protocol": "file://",
+        "indexPath": "/public/dist/index.html",
+        "host": "localhost",
+        "port": 7072,
+        "open": false,
+        "options": {},
+        "ssl": {
+          "key": "",
+          "cert": ""
+        }
+      },
+      "openAppMenu": false,
+      "hardGpu": {
+        "enable": true
+      },
+      "storage": {
+        "dir": "D:\\project\\gitee\\thief\\data"
+      },
+      "addons": {
+        "window": {
+          "enable": true
+        },
+        "tray": {
+          "enable": true,
+          "title": "ToReduce",
+          "icon": "/public/images/tray.png"
+        },
+        "security": {
+          "enable": true
+        },
+        "awaken": {
+          "enable": true,
+          "protocol": "ee",
+          "args": []
+        },
+        "autoUpdater": {
+          "enable": true,
+          "windows": true,
+          "macOS": true,
+          "linux": true,
+          "options": {
+            "provider": "generic",
+            "url": "http://files.dahanbao.cn/"
+          },
+          "force": true
+        }
+      },
+      "exception": {
+        "mainExit": false,
+        "childExit": true,
+        "rendererExit": true
+      },
+      "cross": {},
+      "jobs": {
+        "messageLog": true
+      },
+      "openDevTools": {
+        "mode": "undocked"
+      },
+      "windowsOption": {
+        "title": "ToReduce",
+        "width": 750,
+        "height": 470,
+        "resizable": false,
+        "webPreferences": {
+          "contextIsolation": false,
+          "nodeIntegration": true,
+          "webviewTag": true
+        },
+        "frame": false,
+        "show": false,
+        "icon": "D:\\project\\gitee\\thief\\public\\images\\app-logo.svg"
+      },
+      "remoteUrl": {
+        "enable": false,
+        "url": "http://electron-egg.kaka996.com/"
+      },
+      "coreMiddlewares": [],
+      "coreMiddleware": [],
+      "appMiddlewares": [],
+      "appMiddleware": []
+    }
+  }
+}

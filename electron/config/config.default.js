@@ -168,7 +168,7 @@ module.exports = (appInfo) => {
       linux: true,
       options: {
         provider: 'generic',
-        url: 'http://files.dahanbao.cn/'
+        url: ''
       },
       force: true,
     }

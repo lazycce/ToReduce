@@ -101,6 +101,11 @@ class StorageService extends Service {
         return true;
     }
 
+    async removeWeb(data) {
+        const remove = await this.sqliteDB.db.prepare(`DELETE FROM ${sysWebTable} WHERE id = @id;`);
+        remove.run(data)
+    }
+
     async selectNovelList() {
         const selectSysNovel = this.sqliteDB.db.prepare(`SELECT * FROM ${sysNovelTable}`);
         return selectSysNovel.all();

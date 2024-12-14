@@ -13,10 +13,11 @@ const ipcApiRoute = {
   selectWebList: 'controller.storage.selectWebList',
   selectNovelList: 'controller.storage.selectNovelList',
   addWeb: 'controller.storage.addWeb',
+  removeWeb: 'controller.storage.removeWeb',
   addNovel: 'controller.storage.addNovel',
   getNovelDetail: 'controller.storage.getNovelDetail',
   setWindowSizeByType: 'controller.app.setWindowSizeByType',
-  setWindowAlwaysOnTop: 'controller.app.setWindowAlwaysOnTop'
+  setWindowAlwaysOnTop: 'controller.app.setWindowAlwaysOnTop',
 }
 
 export {

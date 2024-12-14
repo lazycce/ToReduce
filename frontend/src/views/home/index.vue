@@ -13,7 +13,7 @@ import { useRouter } from 'vue-router';
 import InputSearch from "@/views/components/InputSearch.vue";
 import { ipcApiRoute } from '@/api/main';
 import { ipc } from '@/utils/ipcRenderer';
-import {onActivated, ref} from 'vue';
+import { onActivated, ref } from 'vue';
 import WebCard from "@/views/components/WebCard.vue";
 import Footer from "@/components/global/Footer.vue";
 

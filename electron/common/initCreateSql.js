@@ -38,7 +38,7 @@ CREATE TABLE sys_novel_detail
 const createSysConfig = `
 CREATE TABLE sys_config 
     (
-        key CHAR(50),
+        name CHAR(50),
         value CHAR(50)
     )
 `

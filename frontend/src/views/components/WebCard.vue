@@ -1,10 +1,25 @@
 <template>
-  <div v-for="(item, index) in data" class="light-green" :key="index" @click="goWebPage(item)">
+  <div @contextmenu.prevent="handleShowMenu" v-for="(item, index) in data" class="light-green" :key="index" @click="goWebPage(item)">
     {{ item.name }}
   </div>
+  <NDropdown
+    placement="bottom-start"
+    trigger="manual"
+    :x="menuPosition.x"
+    :y="menuPosition.y"
+    :options="options"
+    :show="showMenu"
+    @select="handleMenuSelect"
+    @clickoutside="showMenu = false"
+  />
 </template>
 <script setup>
 import { useRouter } from 'vue-router';
+import { NDropdown, NIcon } from 'naive-ui';
+import { ref, nextTick, h } from 'vue';
+import { TrashOutline, CreateOutline } from '@vicons/ionicons5';
+import { ipcApiRoute } from '@/api/main';
+import { ipc } from '@/utils/ipcRenderer';
 
 const props = defineProps({
   data: {
@@ -13,14 +28,59 @@ const props = defineProps({
   }
 })
 
+function renderIcon(icon) {
+  return () => {
+    return h(NIcon, null, {
+      default: () => h(icon)
+    })
+  }
+}
+
+const showMenu = ref(false);
+const menuPosition = ref({
+  x: 0,
+  y: 0
+});
+
+const handleShowMenu = (e) => {
+  e.preventDefault()
+  showMenu.value = false
+  nextTick().then(() => {
+    showMenu.value = true
+    menuPosition.value.x = e.clientX
+    menuPosition.value.y = e.clientY
+  })
+}
+const removeKey = 'remove';
+const editKey = 'edit';
+
+const handleMenuSelect = (key) => {
+  if (key === removeKey) {
+    ipc.invoke(ipcApiRoute.removeWeb)
+  } else {
+
+  }
+}
+
+const options = [
+  {
+    label: '编辑',
+    key: editKey,
+    icon: renderIcon(CreateOutline)
+  },
+  {
+    label: '删除',
+    key: removeKey,
+    icon: renderIcon(TrashOutline)
+  }
+];
+
 const router = useRouter();
 const goWebPage = (item) => {
-  console.log('item', item)
   router.push({
     path: '/web',
     query: item
   })
-  // router.push("/web?url=" + item.url)
 }
 </script>
 <style lang="less" scoped>

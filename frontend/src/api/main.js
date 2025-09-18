@@ -1,4 +1,3 @@
-
 /**
  * 主进程与渲染进程通信频道定义
  * Definition of communication channels between main process and rendering process
@@ -10,14 +9,16 @@ const ipcApiRoute = {
   themeToggle: 'controller.app.themeToggle',
   reset: 'controller.storage.reset',
   addTestDataSqlite: 'controller.storage.test',
-  selectWebList: 'controller.storage.selectWebList',
-  selectNovelList: 'controller.storage.selectNovelList',
-  addWeb: 'controller.storage.addWeb',
-  removeWeb: 'controller.storage.removeWeb',
-  addNovel: 'controller.storage.addNovel',
-  getNovelDetail: 'controller.storage.getNovelDetail',
   setWindowSizeByType: 'controller.app.setWindowSizeByType',
   setWindowAlwaysOnTop: 'controller.app.setWindowAlwaysOnTop',
+  showWindow: 'controller.app.showWindow',
+  // 正常接口
+  login: 'controller.api.login',
+  getAlarmList: 'controller.api.getAlarmList',
+  // 打开外部链接
+  openExternal: 'controller.app.openExternal',
+  // 截图
+  captureWindow: 'controller.app.captureWindow'
 }
 
 export {

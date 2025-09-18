@@ -12,7 +12,7 @@ module.exports = (appInfo) => {
   /**
    * 开发者工具
    */
-  config.openDevTools = false;
+  config.openDevTools = true;
 
   /**
    * 应用程序顶部菜单
@@ -23,11 +23,11 @@ module.exports = (appInfo) => {
    * 主窗口
    */
   config.windowsOption = {
-    title: 'ToReduce',
+    title: '健康报警',
     width: 750,
     height: 470,
     resizable: false,
-    // alwaysOnTop: true,
+    alwaysOnTop: true,
     webPreferences: {
       //webSecurity: false,
       contextIsolation: false, // false -> 可在渲染进程中使用electron的api，true->需要bridge.js(contextBridge)
@@ -36,7 +36,6 @@ module.exports = (appInfo) => {
       //preload: path.join(appInfo.baseDir, 'preload', 'bridge.js'),
     },
     frame: false,
-    show: false,
     icon: path.join(appInfo.home, 'public', 'images', 'app-logo.svg'),
   };
 

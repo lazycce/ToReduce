@@ -1,68 +1,59 @@
 <template>
   <div class="app-container">
-    <InputSearch @search="goWebPage" />
-    <div class="wrap">
-      <WebCard :data="webItems" />
-    </div>
-    <Footer />
+    <n-tabs v-if="show" v-model:value="activeTab" type="line" animated :lazy="false">
+      <n-tab-pane name="sensor" tab="传感器报警" display-directive="show">
+        <SensorIndicatorAlarmList :active="activeTab === 'sensor'" />
+      </n-tab-pane>
+      <n-tab-pane name="sisi" tab="健康指标报警" display-directive="show">
+        <IndicatorAlarmList :active="activeTab === 'sisi'" />
+      </n-tab-pane>
+    </n-tabs>
+    <template v-else>
+      <n-empty description="请配置账号">
+        <template #extra>
+          <n-button size="small" @click="handleLogin">
+            刷 新
+          </n-button>
+        </template>
+      </n-empty>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import InputSearch from "@/views/components/InputSearch.vue";
+import { ref } from 'vue';
+import SensorIndicatorAlarmList from "@/views/components/SensorIndicatorAlarmList.vue";
+import IndicatorAlarmList from "@/views/components/IndicatorAlarmList.vue";
 import { ipcApiRoute } from '@/api/main';
 import { ipc } from '@/utils/ipcRenderer';
-import { onActivated, ref } from 'vue';
-import WebCard from "@/views/components/WebCard.vue";
-import Footer from "@/components/global/Footer.vue";
+import { onMounted } from 'vue';
+import _ from "lodash";
 
-const router = useRouter();
-const goWebPage = (url) => {
-  if (!url) {
+const show = ref(false);
+const activeTab = ref('sensor');
+
+const handleLogin = async () => {
+  const username = localStorage.getItem('username');
+  const password = localStorage.getItem('password');
+  if (!username) {
     return;
   }
-  router.push({
-    path: '/web',
-    query: {
-      url,
-      category: 'entertainment'
+  try {
+    const res = await ipc.invoke(ipcApiRoute.login, _.cloneDeep({
+      username,
+      password
+    }));
+    if (res.code === null) {
+      show.value = true;
     }
-  })
-  // router.push("/web?url=" + url + "&category=entertainment");
+  } catch (e) {
+    console.log(e)
+  }
 }
 
-const webItems = ref([]);
-
-const handleQueryWebList = async () => {
-  webItems.value = await ipc.invoke(ipcApiRoute.selectWebList, {
-    category: "entertainment"
-  })
-}
-
-onActivated(() => {
-  handleQueryWebList();
+onMounted(() => {
+  handleLogin()
 })
-
 </script>
 <style scoped>
-.wrap {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.light-green {
-  font-size: 18px;
-  font-weight: bold;
-  height: 108px;
-  width: 108px;
-  border-radius: 8px;
-  background-color: rgba(0, 128, 0, 0.12);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 </style>

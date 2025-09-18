@@ -3,22 +3,22 @@
     "config": {
       "env": "local",
       "name": "ToReduce",
-      "baseDir": "D:\\project\\gitee\\thief\\electron",
-      "HOME": "D:\\project\\gitee\\thief",
-      "rundir": "D:\\project\\gitee\\thief\\electron\\run",
+      "baseDir": "D:\\project\\github\\ToReduce\\electron",
+      "HOME": "D:\\project\\github\\ToReduce",
+      "rundir": "D:\\project\\github\\ToReduce\\electron\\run",
       "dump": {
         "ignore": {}
       },
-      "homeDir": "D:\\project\\gitee\\thief",
-      "root": "D:\\project\\gitee\\thief",
+      "homeDir": "D:\\project\\github\\ToReduce",
+      "root": "D:\\project\\github\\ToReduce",
       "appUserDataDir": "C:\\Users\\haotian lu\\AppData\\Roaming\\ToReduce",
       "userHome": "C:\\Users\\haotian lu",
       "appVersion": "1.0.0",
       "isPackaged": false,
-      "execDir": "D:\\project\\gitee\\thief",
+      "execDir": "D:\\project\\github\\ToReduce",
       "logger": {
         "type": "application",
-        "dir": "D:\\project\\gitee\\thief\\logs",
+        "dir": "D:\\project\\github\\ToReduce\\logs",
         "encoding": "utf8",
         "env": "local",
         "level": "INFO",
@@ -136,7 +136,7 @@
         "enable": true
       },
       "storage": {
-        "dir": "D:\\project\\gitee\\thief\\data"
+        "dir": "D:\\project\\github\\ToReduce\\data"
       },
       "addons": {
         "window": {
@@ -180,18 +180,18 @@
         "mode": "undocked"
       },
       "windowsOption": {
-        "title": "ToReduce",
+        "title": "健康报警",
         "width": 750,
         "height": 470,
         "resizable": false,
+        "alwaysOnTop": true,
         "webPreferences": {
           "contextIsolation": false,
           "nodeIntegration": true,
           "webviewTag": true
         },
         "frame": false,
-        "show": false,
-        "icon": "D:\\project\\gitee\\thief\\public\\images\\app-logo.svg"
+        "icon": "D:\\project\\github\\ToReduce\\public\\images\\app-logo.svg"
       },
       "remoteUrl": {
         "enable": false,

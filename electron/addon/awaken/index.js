@@ -1,7 +1,6 @@
 const { app: electronApp } = require('electron');
 const Log = require('ee-core/log');
 const Conf = require('ee-core/config');
-const Services = require('ee-core/services');
 
 /**
  * 唤醒插件
@@ -35,9 +34,6 @@ class AwakenAddon {
     electronApp.on('open-url', (event, urlStr) => {
       this.handleUrl(urlStr)
     })
-
-    // 初始化表
-    Services.get('storage').init();
   }
 
   /**

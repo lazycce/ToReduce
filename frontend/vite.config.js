@@ -17,6 +17,16 @@ export default defineConfig(({ command, mode }) => {
         '@': path.resolve(__dirname, 'src'),
       },
     },
+    // 开发服务器配置
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8080',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
+    },
     css: {
       preprocessorOptions: {
         less: {

@@ -1,11 +1,13 @@
 <template>
   <n-config-provider :theme="null">
-    <router-view v-slot="{ Component }">
-      <keep-alive exclude="web">
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
-    <n-global-style />
+    <n-message-provider>
+      <router-view v-slot="{ Component }">
+        <keep-alive exclude="web">
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+      <n-global-style />
+    </n-message-provider>
   </n-config-provider>
 </template>
 

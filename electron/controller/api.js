@@ -5,8 +5,8 @@ const axios = require('axios');
 const { URL } = require('url');
 const Log = require('ee-core/log');
 
-// const BASE_URL = "http://10.1.235.68:9090";
-const BASE_URL = "http://192.168.100.141:9090";
+const BASE_URL = "http://10.1.235.68:9090";
+// const BASE_URL = "http://192.168.100.141:9090";
 
 /**
  * Api
@@ -188,7 +188,7 @@ class ApiController extends Controller {
             // 打印请求前的cookies
             Log.info('[ApiController] Cookies before alarm list request:', this.getCookiesString());
             
-            const result = await this.request('GET', '/api/1.0/healthIndicatorAlarm/page?pageNum=1&pageSize=100', data);
+            const result = await this.request('GET', '/api/1.0/healthIndicatorAlarm/page?pageNum=1&pageSize=30&alarmCategories=compose%2Csingle&sortKeys%5B0%5D.field=create_time&sortKeys%5B0%5D.sort=DESC', data);
             Log.info('[ApiController] Alarm list fetched successfully, result count:', result?.data?.length || 0);
             return result;
         } catch(error) {

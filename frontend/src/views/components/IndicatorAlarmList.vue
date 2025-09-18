@@ -9,20 +9,20 @@
   />
 </template>
 <script setup lang="jsx">
-import { ref, watch } from 'vue';
 import { h } from 'vue';
 import { NButton } from 'naive-ui';
-import { ipcApiRoute } from '@/api/main';
-import { ipc } from '@/utils/ipcRenderer';
-import _ from 'lodash';
 const { shell } = require('electron');
 
-const props = defineProps({
-  active: Boolean
+defineProps({
+  data: {
+    type: Array,
+    default: () => []
+  },
+  getRowProps: {
+    type: Function,
+    default: () => {}
+  }
 });
-
-const data = ref([]);
-let lastKeys = [];
 
 // 处理浏览器跳转
 const play = (row) => {
@@ -97,63 +97,10 @@ const columns = [
     }
   },
 ]
-
-let timer = null;
-
-const handleQuery = async () => {
-  // 带参数请求
-  const res = await ipc.invoke(ipcApiRoute.getAlarmList, _.cloneDeep({}));
-  console.log(res)
-  // 标记新数据
-  const newKeys = res.records.map(item => item.createTime);
-  res.records.forEach(item => {
-    item.isNew = !lastKeys.includes(item.createTime);
-  });
-  lastKeys = newKeys;
-  if (res.records.length > 0 && data.value.length > 0) {
-    if (res.records[0].createTime !== data.value[0].createTime) {
-      await ipc.invoke(ipcApiRoute.showWindow);
-    }
-  }
-  data.value = res.records;
-};
-
-
-const getRowProps = (row) => {
-  let cls = '';
-  if (row.isNew) cls += ' row-new';
-  return { class: cls };
-};
-
-const startQueryTimer = () => {
-  handleQuery();
-  timer = setInterval(() => {
-    handleQuery();
-  }, 2 * 1000);
-};
-
-const stopQueryTimer = () => {
-  if (timer) {
-    clearInterval(timer);
-    timer = null;
-  }
-};
-
-watch(
-  () => props.active,
-  (val) => {
-    if (val) {
-      startQueryTimer();
-    } else {
-      stopQueryTimer();
-    }
-  },
-  { immediate: true }
-);
 </script>
 <style lang="less">
 .row-new > td {
-  background: #ffeded !important;
+  background: #f8d7da !important;
   transition: background 0.5s;
 }
 </style>

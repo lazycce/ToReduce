@@ -9,25 +9,25 @@
   />
 </template>
 <script setup lang="jsx">
-import { ref, watch, nextTick } from 'vue';
 import { h } from 'vue';
 import { NButton } from 'naive-ui';
-import { ipcApiRoute } from '@/api/main';
-import { ipc } from '@/utils/ipcRenderer';
-import { getSensorWarningData } from '@/api/api';
 const { shell } = require('electron');
 
-const props = defineProps({
-  active: Boolean
+defineProps({
+  data: {
+    type: Array,
+    default: () => []
+  },
+  getRowProps: {
+    type: Function,
+    default: () => {}
+  }
 });
-
-const data = ref([]);
-let lastKeys = [];
 
 // 处理浏览器跳转
 const play = (row) => {
   // 构建URL，这里假设有一个基础URL
-  const url = `https://test02.ui.piccadilly.int.proaimltd.com.cn:30443/healthManagement/indicator/indicatorAlarmDetail?id=${row.id}&type=detail`
+  const url = `http://10.1.235.70:30511`
   shell.openExternal(url);
 };
 
@@ -97,80 +97,10 @@ const columns = [
     }
   },
 ]
-
-const page = ref(1);
-
-const queryParams = ref({
-  indicatorName: '',
-  alarmCategories: []
-})
-
-let timer = null;
-
-const handleQuery = async () => {
-  // 计算今天零点和当前时间戳
-  const now = Date.now();
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const startTs = today.getTime();
-  const endTs = now;
-
-  // 传递参数
-  const res = await getSensorWarningData({ startTs, endTs });
-  if (res.code === 200) {
-    // 标记新数据
-    const newKeys = res.data.map(item => item.warningTs);
-    res.data.forEach(item => {
-      item.isNew = !lastKeys.includes(item.warningTs);
-    });
-    lastKeys = newKeys;
-    if (res.data.length > 0 && data.value.length > 0) {
-      if (res.data[0].warningTs !== data.value[0].warningTs) {
-        await ipc.invoke(ipcApiRoute.showWindow);
-      }
-    }
-    data.value = res.data;
-  }
-};
-
-const startQueryTimer = () => {
-  handleQuery();
-  timer = setInterval(() => {
-    handleQuery();
-  }, 2 * 1000);
-};
-
-const stopQueryTimer = () => {
-  if (timer) {
-    clearInterval(timer);
-    timer = null;
-  }
-};
-
-watch(
-  () => props.active,
-  (val) => {
-    if (val) {
-      startQueryTimer();
-    } else {
-      stopQueryTimer();
-    }
-  },
-  { immediate: true }
-);
-
-
-
-
-const getRowProps = (row) => {
-  let cls = '';
-  if (row.isNew) cls += ' row-new';
-  return { class: cls };
-};
 </script>
 <style lang="less">
 .row-new > td {
-  background: #ffeded !important;
+  background: #f8d7da !important;
   transition: background 0.5s;
 }
 </style>

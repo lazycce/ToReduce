@@ -6,19 +6,14 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useAppStore } from '@/store/app'
 import { NSlider } from 'naive-ui';
 import { ipcApiRoute } from '@/api/main';
 import { ipc } from '@/utils/ipcRenderer';
 import { useRouter } from 'vue-router';
 
-const appstore = useAppStore();
-const opacity = ref(appstore.windowOpacity);
-
 const handleChange = (value) => {
   opacity.value = value;
   ipc.invoke(ipcApiRoute.setWindowOpacity, { opacity: value / 100 });
-  appstore.setWindowOpacity(value);
 }
 
 const router = useRouter();
@@ -31,7 +26,6 @@ const handleBackHome = () => {
 }
 
 onMounted(() => {
-  opacity.value = appstore.windowOpacity;
   handleChange(opacity.value);
 })
 </script>

@@ -34,8 +34,10 @@ class AppController extends Controller {
         await Services.get('app').hideWindow();
     }
 
-    async showWindow() {
-        await CoreWindow.getMainWindow().show();
+   async showWindow() {
+        const mainWindow = CoreWindow.getMainWindow();
+        mainWindow.center();
+        await mainWindow.show();
     }
 
     /**

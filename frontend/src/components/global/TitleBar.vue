@@ -61,10 +61,8 @@ import {
 import { ipcApiRoute } from '@/api/main';
 import { ipc } from '@/utils/ipcRenderer';
 import { h, ref } from 'vue';
-import { useAppStore } from '@/store/app';
 import _ from 'lodash';
 
-const appStore = useAppStore();
 const formRef = ref();
 const form = ref({
   username: '',
@@ -82,11 +80,6 @@ const rules = {
     message: '必填',
     trigger: 'blur'
   }
-}
-
-const handleChangeOnTop = async () => {
-  ipc.invoke(ipcApiRoute.setWindowAlwaysOnTop, { flag: !appStore.windowAlwaysOnTop})
-  appStore.setWindowAlwaysOnTop(!appStore.windowAlwaysOnTop);
 }
 
 const handleHideWindow = () => {

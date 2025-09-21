@@ -40,6 +40,10 @@ class AppController extends Controller {
         await mainWindow.show();
     }
 
+    async setAutoLaunch(enable) {
+        await Services.get('app').setAutoLaunch(enable);
+    }
+
     /**
      * 打开外部链接
      * @param {Object} args - 参数对象

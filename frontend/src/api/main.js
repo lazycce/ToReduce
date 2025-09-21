@@ -12,6 +12,7 @@ const ipcApiRoute = {
   setWindowSizeByType: 'controller.app.setWindowSizeByType',
   setWindowAlwaysOnTop: 'controller.app.setWindowAlwaysOnTop',
   showWindow: 'controller.app.showWindow',
+  setAutoLaunch: 'controller.app.setAutoLaunch',
   // 正常接口
   login: 'controller.api.login',
   getAlarmList: 'controller.api.getAlarmList',

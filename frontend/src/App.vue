@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, onMounted } from 'vue';
 import { useAppStore } from '@/store/app';
 import alarmSound from '@/assets/statics/alarm.mp3';
 import { ipc } from '@/utils/ipcRenderer';
@@ -19,6 +19,13 @@ const appStore = useAppStore();
 const isAlarming = computed(() => appStore.isAlarming);
 const audio = ref(new Audio(alarmSound));
 audio.value.loop = true;
+
+onMounted(() => {
+  // if (import.meta.env.PROD) {
+  // }
+  ipc.invoke(ipcApiRoute.setAutoLaunch, true);
+
+});
 
 watch(isAlarming, async (newVal) => {
   if (newVal) {
